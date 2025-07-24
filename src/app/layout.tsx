@@ -20,6 +20,9 @@ const novaSquare = Nova_Square({
 export const metadata = {
   title: "HOODIE",
   description: "HOODIE Store",
+  icons: {
+    icon: '/logo.ico',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
