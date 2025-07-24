@@ -1,0 +1,146 @@
+.hoodieSection {
+    background-color: #000;
+    color: #fff;
+    padding: 20px 0 0 0;
+    text-align: center;
+    margin: 0;
+}
+
+.hoodieSection .container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.titleContainer {
+    position: relative;
+}
+
+.title {
+    font-size: 300px;
+    font-weight: bold;
+    color: #fef6f1;
+    line-height: 0;
+}
+
+.categoryButtons {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.categoryButtons button {
+    width: 163px;
+    background: linear-gradient(45deg, #000000, #000000, #e1cad1d4);
+    color: #fff;
+    border: 1px solid white;
+    padding: 15px 0;
+    border-radius: 30px;
+    font-weight: 400;
+    font-size: 23px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.categoryButtons button:nth-child(1) {
+    transform: rotate(4deg);
+}
+
+.categoryButtons button:nth-child(2) {
+    transform: rotate(-4deg);
+
+}
+
+.categoryButtons button:nth-child(3) {
+    transform: rotate(6deg);
+}
+
+.categoryButtons button:nth-child(4) {
+    transform: rotate(-5deg);
+}
+
+.categoryButtons button:hover {
+    background: #fff;
+    color: #000;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 60px;
+    flex-wrap: wrap;
+}
+
+.leftText,
+.rightText {
+    flex: 1;
+    max-width: 250px;
+    font-size: 19px;
+    color: #999;
+    text-align: start;
+}
+
+.rightText a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.imageContainer {
+    width: 580px;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(45deg, #eee0d6, #ddd9d6);
+    padding-top: 30px;
+    overflow: hidden;
+}
+
+.modelImage {
+    object-fit: cover;
+}
+
+@media (max-width: 700px) {
+    .hoodieSection {
+        padding: 20px 0;
+    }
+
+    .hoodieSection .container {
+        width: 90%;
+    }
+
+    .title {
+        font-size: 90px;
+        font-weight: bold;
+        color: #fef6f1;
+        line-height: 0;
+    }
+
+    .categoryButtons {
+        gap: 10px;
+    }
+
+    .categoryButtons button {
+        width: 100px;
+        background: linear-gradient(45deg, #000000, #000000, #e1cad1d4);
+        color: #fff;
+        border: 1px solid white;
+        padding: 15px 0;
+        border-radius: 30px;
+        font-weight: 400;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .imageContainer {
+        height: 400px;
+    }
+
+
+}

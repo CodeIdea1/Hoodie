@@ -1,0 +1,146 @@
+.heroSection {
+    color: black;
+    text-align: center;
+    padding: 60px 20px;
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+.heroTopText {
+    font-size: 17px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 0;
+    padding: 0;
+    margin-top: -10px;
+    text-align: end;
+    width: 1000px;
+    font-weight: 600;
+}
+
+.heroTitle {
+    font-size: 180px;
+    font-weight: 600;
+    letter-spacing: 10px;
+    margin-bottom: 40px;
+    margin-top: 100px;
+    line-height: 0;
+    font-family: 'Nova Square', sans-serif;
+}
+
+.heroImageWrapper {
+    background: linear-gradient(45deg, #eee0d6, #ddd9d6);
+    position: relative;
+    width: 1200px;
+    padding: 0 16px;
+    margin: 100px auto 0 auto;
+}
+
+.heroImage {
+    width: 600px;
+    height: auto;
+    border-radius: 16px;
+    object-fit: cover;
+    margin-top: -100px;
+}
+
+.heroCTA {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.heroCTA:hover {
+    background: #f2f2f2;
+}
+
+.ctaTitle {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.ctaSubtitle {
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+.ctaArrow {
+    font-size: 16px;
+}
+
+.heroSocialLinks {
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+    margin-top: 40px;
+    text-transform: uppercase;
+    font-size: 13px;
+    flex-wrap: wrap;
+}
+
+.heroSocialLinks a {
+    text-decoration: none;
+    color: black;
+    transition: opacity 0.3s;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.heroSocialLinks a:hover {
+    opacity: 0.6;
+}
+
+
+@media (max-width: 700px) {
+    .heroTopText {
+        width: 90%;
+        margin: auto;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .heroTitle {
+        font-size: 83px;
+        margin: 0 auto;
+        line-height: 1.1;
+    }
+
+    .heroImageWrapper {
+        padding: 0;
+        width: 100%;
+        margin: 40px auto 0 auto;
+    }
+
+    .heroImage {
+        width: 100%;
+    }
+
+    .heroSocialLinks {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .heroSocialLinks a {
+        background-color: #f9f9f9;
+        padding: 10px 8px;
+        border-radius: 20px;
+        border: 1px solid #ddd;
+        width: 100%;
+        max-width: 150px;
+        font-size: 15px;
+        transition: background 0.3s;
+    }
+}

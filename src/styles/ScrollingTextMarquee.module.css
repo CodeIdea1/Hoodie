@@ -1,0 +1,33 @@
+.marqueeWrapper {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    padding: 15px 0;
+    margin: 60px 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.138);
+    border-top: 2px solid rgba(0, 0, 0, 0.138);
+}
+
+.marqueeContent {
+    display: inline-block;
+    white-space: nowrap;
+    animation: scroll-left 25s linear infinite;
+}
+
+.item {
+    display: inline-block;
+    margin-right: 64px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}

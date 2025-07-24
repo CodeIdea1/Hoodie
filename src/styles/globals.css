@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-nova), sans-serif;
+  overflow-x: hidden;
+}
+
+.heroSection {
+  text-align: center;
+  padding: 40px;
+}
+
+.container {
+  width: 1200px;
+  margin: auto;
+}
+
+
+
+.footer {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #272727;
+  color: #ffffffbb;
+  font-size: 15px;
+  border-top: 1px solid #333;
+}
+
+@media (max-width: 700px) {
+  .container {
+    width: 100%;
+  }
+
+  .footer {
+    padding: 10px 0;
+    font-size: 13px;
+  }
+}

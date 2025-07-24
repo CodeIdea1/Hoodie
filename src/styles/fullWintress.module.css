@@ -1,0 +1,173 @@
+.fullWintressSection {
+    padding: 6rem 2rem 2rem 2rem;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+.fullWintressSection .container {
+    width: 1200px;
+    margin: auto;
+}
+
+.productGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-items: center;
+}
+
+.productCard {
+    position: relative;
+    width: 97%;
+}
+
+.imageContainer {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: linear-gradient(45deg, #ddd9d6, #eee0d6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.height770 {
+    height: 770px;
+}
+
+
+.productImage {
+    width: 340px !important;
+    height: 540px !important;
+    margin: auto;
+}
+
+.height400 {
+    height: 400px;
+}
+
+.productImage {
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.productInfo {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+    padding: 40px 0;
+    color: black;
+    text-align: start;
+}
+
+.textWrapper {
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.productNumber {
+    font-size: 120px;
+    font-weight: 400;
+    width: 70%;
+    line-height: 0.9;
+    margin: 0;
+}
+
+.productTitle {
+    width: 300px;
+    font-size: 41px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.productDescription {
+    font-size: 15px;
+    line-height: 1.2;
+    margin: 15px 0 0 0;
+    text-align: start;
+    color: #333;
+}
+
+.sectionTitle {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #000;
+    margin: 1rem 0;
+    letter-spacing: 2px;
+}
+
+.collectionButton {
+    padding: 15px 25px;
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.345);
+    font-size: 17px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: .3s ease-out;
+    width: 100%;
+}
+
+.collectionButton:hover {
+    background-color: #e3c8c8a8;
+}
+
+.customText {
+    font-size: 14.5px;
+    color: #333333d0;
+    margin: 30px 0;
+}
+
+@media (max-width: 700px) {
+    .fullWintressSection .container {
+        width: 100%;
+    }
+
+    .sectionTitle {
+        font-size: 40px;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .productGrid {
+        grid-template-columns: repeat(1, 1fr);
+
+    }
+
+    .imageContainer {
+        height: 300px;
+    }
+
+    .height770 {
+        height: 370px;
+    }
+
+    .height400 {
+        height: 190px;
+    }
+
+    .productImage {
+        width: 80% !important;
+        height: auto !important;
+        margin: auto;
+    }
+
+    .productInfo {
+        flex-direction: column;
+        padding: 15px 0;
+    }
+
+    .productNumber {
+        font-size: 66px;
+    }
+
+    .collectionButton {
+        padding: 15px 0;
+        font-size: 12px;
+    }
+}
