@@ -13,21 +13,36 @@ interface Product {
 
 const products: Product[] = [
     {
-        id: 1, title: 'Sweatshirt', description: 'SWEATSHIRT THEY REPARTICULARLY FAVOURED FOR STYLES, COLORS, AND DESIGNS. THEIR RELAXED AND ESPECIALLY DURING COLDER SEASONS.',
+        id: 1,
+        title: 'Sweatshirt',
+        description: 'SWEATSHIRT THEY REPARTICULARLY FAVOURED FOR STYLES, COLORS, AND DESIGNS. THEIR RELAXED AND ESPECIALLY DURING COLDER SEASONS.',
         image: '/Untitled-10.png'
     },
     {
-        id: 2, title: 'Athletic Hoodie', description: 'AN "ATHLETIC HOODIE" TO A SPECIFIC TYPE OF HOODIE DESIGNED WITH FEATURES TAILORED FOR ATHLETIC ACTIVITIES AND SPORTS.',
+        id: 2,
+        title: 'Athletic Hoodie',
+        description: 'AN "ATHLETIC HOODIE" TO A SPECIFIC TYPE OF HOODIE DESIGNED WITH FEATURES TAILORED FOR ATHLETIC ACTIVITIES AND SPORTS.',
         image: '/Untitled-3.png'
     },
     {
-        id: 3, title: '', description: 'A hoodie full winters likely refers to a hoodie specifically designed for cold winter weather.',
+        id: 3,
+        title: 'Winter Hoodie',
+        description: 'A hoodie full winters likely refers to a hoodie specifically designed for cold winter weather.',
         image: '/Untitled-2.png'
     },
-    { id: 4, title: '', description: '', image: '/Best Leather Shoes Men Casual-Artguru.png' },
+    {
+        id: 4,
+        title: 'New Collection',
+        description: 'Limited Edition Collection',
+        image: '/Best Leather Shoes Men Casual-Artguru.png'
+    },
 ];
 
 export default function FullWintress() {
+    const [isClient, setIsClient] = useState(false);
+    const [sectionInView, setSectionInView] = useState(false);
+    const [animatedCards, setAnimatedCards] = useState<Set<number>>(new Set());
+
     const firstTwoProducts = products.slice(0, 2);
     const lastTwoProducts = products.slice(2);
 
@@ -36,10 +51,15 @@ export default function FullWintress() {
     const firstGridRef = useRef<HTMLDivElement | null>(null);
     const secondGridRef = useRef<HTMLDivElement | null>(null);
 
-    const [sectionInView, setSectionInView] = useState(false);
-    const [animatedCards, setAnimatedCards] = useState<Set<number>>(new Set());
-
+    // التأكد من أننا في بيئة المتصفح
     useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    // Intersection Observer للكشف عن دخول القسم في المشاهدة
+    useEffect(() => {
+        if (!isClient) return;
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -54,76 +74,112 @@ export default function FullWintress() {
             }
         );
 
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
+        const currentSection = sectionRef.current;
+        if (currentSection) {
+            observer.observe(currentSection);
         }
 
         return () => {
-            if (sectionRef.current) {
-                observer.unobserve(sectionRef.current);
+            if (currentSection) {
+                observer.unobserve(currentSection);
             }
         };
-    }, [sectionInView]);
+    }, [sectionInView, isClient]);
 
+    // تطبيق الانيميشن عند دخول القسم في المشاهدة
     useEffect(() => {
-        if (sectionInView) {
+        if (!isClient || !sectionInView) return;
 
+        const animateElements = () => {
+            // انيميشن العنوان
             if (titleRef.current) {
                 titleRef.current.style.transform = 'translateY(0)';
                 titleRef.current.style.opacity = '1';
             }
 
+            // انيميشن الكاردز الأولى
             if (firstGridRef.current) {
                 const firstCards = firstGridRef.current.querySelectorAll(`.${styles.productCard}`);
                 firstCards.forEach((card, index) => {
                     setTimeout(() => {
-                        (card as HTMLElement).style.transform = 'translateY(0)';
-                        (card as HTMLElement).style.opacity = '1';
-                        setAnimatedCards(prev => new Set(prev).add(index));
+                        if (card && (card as HTMLElement).isConnected) {
+                            (card as HTMLElement).style.transform = 'translateY(0)';
+                            (card as HTMLElement).style.opacity = '1';
+                            setAnimatedCards(prev => new Set(prev).add(index));
+                        }
                     }, index * 200);
                 });
             }
 
+            // انيميشن الكاردز الثانية
             setTimeout(() => {
                 if (secondGridRef.current) {
                     const secondCards = secondGridRef.current.querySelectorAll(`.${styles.productCard}`);
                     secondCards.forEach((card, index) => {
                         setTimeout(() => {
-                            (card as HTMLElement).style.transform = 'translateY(0)';
-                            (card as HTMLElement).style.opacity = '1';
-                            setAnimatedCards(prev => new Set(prev).add(index + 2));
+                            if (card && (card as HTMLElement).isConnected) {
+                                (card as HTMLElement).style.transform = 'translateY(0)';
+                                (card as HTMLElement).style.opacity = '1';
+                                setAnimatedCards(prev => new Set(prev).add(index + 2));
+                            }
                         }, index * 200);
                     });
                 }
             }, firstTwoProducts.length * 200 + 300);
-        }
-    }, [sectionInView, firstTwoProducts.length]);
+        };
 
+        const timer = setTimeout(animateElements, 100);
+        return () => clearTimeout(timer);
+    }, [sectionInView, firstTwoProducts.length, isClient]);
+
+    // تهيئة الانيميشن الأولية
     useEffect(() => {
-        if (titleRef.current) {
-            titleRef.current.style.transform = 'translateY(50px)';
-            titleRef.current.style.opacity = '0';
-            titleRef.current.style.transition = 'transform 0.6s ease-out, opacity 0.6s ease-out';
-        }
+        if (!isClient) return;
 
-        if (firstGridRef.current) {
-            const firstCards = firstGridRef.current.querySelectorAll(`.${styles.productCard}`);
-            firstCards.forEach((card) => {
-                (card as HTMLElement).style.transform = 'translateY(80px)';
-                (card as HTMLElement).style.opacity = '0';
-                (card as HTMLElement).style.transition = 'transform 0.7s ease-out, opacity 0.7s ease-out';
-            });
-        }
+        const initializeAnimation = () => {
+            if (titleRef.current) {
+                titleRef.current.style.transform = 'translateY(50px)';
+                titleRef.current.style.opacity = '0';
+                titleRef.current.style.transition = 'transform 0.6s ease-out, opacity 0.6s ease-out';
+            }
 
-        if (secondGridRef.current) {
-            const secondCards = secondGridRef.current.querySelectorAll(`.${styles.productCard}`);
-            secondCards.forEach((card) => {
-                (card as HTMLElement).style.transform = 'translateY(80px)';
-                (card as HTMLElement).style.opacity = '0';
-                (card as HTMLElement).style.transition = 'transform 0.7s ease-out, opacity 0.7s ease-out';
-            });
-        }
-    }, []);
+            if (firstGridRef.current) {
+                const firstCards = firstGridRef.current.querySelectorAll(`.${styles.productCard}`);
+                firstCards.forEach((card) => {
+                    if (card) {
+                        (card as HTMLElement).style.transform = 'translateY(80px)';
+                        (card as HTMLElement).style.opacity = '0';
+                        (card as HTMLElement).style.transition = 'transform 0.7s ease-out, opacity 0.7s ease-out';
+                    }
+                });
+            }
+
+            if (secondGridRef.current) {
+                const secondCards = secondGridRef.current.querySelectorAll(`.${styles.productCard}`);
+                secondCards.forEach((card) => {
+                    if (card) {
+                        (card as HTMLElement).style.transform = 'translateY(80px)';
+                        (card as HTMLElement).style.opacity = '0';
+                        (card as HTMLElement).style.transition = 'transform 0.7s ease-out, opacity 0.7s ease-out';
+                    }
+                });
+            }
+        };
+
+        const timer = setTimeout(initializeAnimation, 100);
+        return () => clearTimeout(timer);
+    }, [isClient]);
+
+    // عرض loading state أثناء التحميل في المتصفح
+    if (!isClient) {
+        return (
+            <section className={styles.fullWintressSection}>
+                <div className={styles.container}>
+                    {/* placeholder content */}
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className={styles.fullWintressSection} ref={sectionRef}>
@@ -137,6 +193,8 @@ export default function FullWintress() {
                                     alt={product.title}
                                     fill
                                     className={styles.productImage}
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    priority={index === 0}
                                 />
                             </div>
                             <div className={styles.productInfo}>
@@ -149,7 +207,9 @@ export default function FullWintress() {
                         </div>
                     ))}
                 </div>
+
                 <h1 className={styles.sectionTitle} ref={titleRef}>FULL WINTERS</h1>
+
                 <div className={styles.productGrid} ref={secondGridRef}>
                     {lastTwoProducts.map((product, index) => (
                         <div key={product.id} className={styles.productCard}>
@@ -159,12 +219,20 @@ export default function FullWintress() {
                                     alt={product.title}
                                     fill
                                     className={styles.productImage}
+                                    sizes="(max-width: 768px) 100vw, 50vw"
                                 />
                             </div>
                             {product.id === 4 ? (
                                 <div>
-                                    <p className={styles.customText}>NEW ARRIVALS JUST DROPPED! EXPLORE THE LATEST STYLES AND LIMITED EDITION PIECES NOW.!</p>
-                                    <button className={styles.collectionButton}>NEW COLLECTION // LIMITED EDITION</button>
+                                    <p className={styles.customText}>
+                                        NEW ARRIVALS JUST DROPPED! EXPLORE THE LATEST STYLES AND LIMITED EDITION PIECES NOW!
+                                    </p>
+                                    <button
+                                        className={styles.collectionButton}
+                                        aria-label="View new limited edition collection"
+                                    >
+                                        NEW COLLECTION // LIMITED EDITION
+                                    </button>
                                 </div>
                             ) : (
                                 <div className={styles.productInfo}>

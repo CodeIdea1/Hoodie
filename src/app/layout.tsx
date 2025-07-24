@@ -1,9 +1,12 @@
 import "./../styles/globals.css";
 import Header from '../components/Header';
 import Footer from "@/components/Footer";
-import PageWrapper from "@/components/PageWrapper";
 
 import { Nova_Square } from "next/font/google";
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const novaSquare = Nova_Square({
   subsets: ["latin"],
@@ -23,11 +26,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={novaSquare.variable}>
       <body>
-        <PageWrapper>
-          <Header />
-          {children}
-          <Footer />
-        </PageWrapper>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );
